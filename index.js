@@ -24,21 +24,23 @@ function getInfo(url, youtubedl, callback) {
             return;
         }
         var format = info._filename.split('.');
-        format = '.'+format[format.length-1]
+        format = '.' + format[format.length - 1]
         callback(info.url, info.title, null, format);
     });
 }
 
-function generateHTMLLink(url, title, format) {
-    return `<a href='${url.replace(/\\/g, "\\\\").replace(/'/g, "\\'")}' download='${title.replace(/\\/g, "\\\\").replace(/'/g, "\\'")+format}'>${title}</a>`;
+function generateHTMLLink(url, title, format, original) {
+    return `<a href='${url.replace(/\\/g, "\\\\").replace(/'/g, "\\'")}' download='${title.replace(/\\/g, "\\\\").replace(/'/g, "\\'")+format}'>${title}</a>
+    <br>
+    <a href='${url.replace(/\\/g, "\\\\").replace(/'/g, "\\'")}'>Raw link</a>`;
 }
 
 (async function() {
     var youtubedl = require('youtube-dl');
-    
+
     console.log('Downloading newest version of youtube-dl');
     await update();
-    
+
     app.get('/', function(req, res) {
         res.send(`<html>
     <head>
@@ -69,14 +71,14 @@ function generateHTMLLink(url, title, format) {
         }
         getInfo(req.query.url, youtubedl, function(url, title, err, format) {
             if (err) {
-                res.send(''+err);
+                res.send('' + err);
                 return;
             }
-            res.send(generateHTMLLink('/rerouteVid?fileURL='+encodeURIComponent(url)+'&fileName='+title+format, title, format));
+            res.send(generateHTMLLink('/rerouteVid?fileURL=' + encodeURIComponent(url) + '&fileName=' + title + format, title, format, url));
         });
     });
-    app.get('/rerouteVid', function(req, res){
-        if(!req.query.fileURL){
+    app.get('/rerouteVid', function(req, res) {
+        if (!req.query.fileURL) {
             res.send('No file url provided');
             return;
         }
@@ -84,17 +86,17 @@ function generateHTMLLink(url, title, format) {
         res.setHeader('Content-type', 'application/octet-stream');
         request.get(req.query.fileURL).pipe(res);
     });
-    app.get('/api', function(req, res){
+    app.get('/api', function(req, res) {
         var result = {};
         res.setHeader('Content-Type', 'application/json');
-        if(!req.query.url){
+        if (!req.query.url) {
             result.success = false;
             result.description = 'No url param provided'
             res.send(JSON.stringify(result, null, 4));
             return;
         }
-        getInfo(req.query.url, youtubedl, function(url, title, err, format){
-            if(err){
+        getInfo(req.query.url, youtubedl, function(url, title, err, format) {
+            if (err) {
                 result.success = false;
                 result.description = err;
                 res.send(JSON.stringify(result, null, 4));
@@ -103,9 +105,9 @@ function generateHTMLLink(url, title, format) {
             result.success = true;
             result.title = title;
             result.url = url;
-            result.fileName = title+format;
+            result.fileName = title + format;
             res.send(JSON.stringify(result, null, 4));
         })
     });
-    app.listen(port, ()=>console.log('\nApp listening on port ' + port + '!'));
+    app.listen(port, () => console.log('\nApp listening on port ' + port + '!'));
 })();
