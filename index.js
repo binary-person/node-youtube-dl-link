@@ -32,7 +32,7 @@ function getInfo(url, youtubedl, callback) {
 function generateHTMLLink(url, title, format, original) {
     return `<a href='${url.replace(/\\/g, "\\\\").replace(/'/g, "\\'")}' download='${title.replace(/\\/g, "\\\\").replace(/'/g, "\\'")+format}'>${title}</a>
     <br>
-    <a href='${url.replace(/\\/g, "\\\\").replace(/'/g, "\\'")}'>Raw link</a>`;
+    <a href='${original.replace(/\\/g, "\\\\").replace(/'/g, "\\'")}'>Raw link</a>`;
 }
 
 (async function() {
