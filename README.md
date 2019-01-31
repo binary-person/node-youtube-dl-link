@@ -2,6 +2,8 @@
 ##### A simple project by Simon Cheng. Special thanks to the awesome library [youtube-dl driver for node](https://github.com/przemyslawpluta/node-youtube-dl) #####
 Hi everyone! This is a program that **only gets high quality videos.** It's only because it's more convenient for myself and others who want use it.
 
+Try it out here! [Youtube Link Extractor](https://youtube-link-sc.herokuapp.com/)
+
 Anyway, to run the program, be sure you have a node version higher than 8.
 ```
 node version
