@@ -24,7 +24,7 @@ function getInfo(url, youtubedl, callback) {
             return;
         }
         var format = info._filename.split('.');
-        format = '.' + format[format.length - 1]
+        format = '.' + format[format.length - 1];
         callback(info.url, info.title, null, format);
     });
 }
@@ -32,7 +32,7 @@ function getInfo(url, youtubedl, callback) {
 function generateHTMLLink(url, title, format, original) {
     return `<a href='${url.replace(/\\/g, "\\\\").replace(/'/g, "\\'")}' download='${title.replace(/\\/g, "\\\\").replace(/'/g, "\\'")+format}'>${title}</a>
     <br>
-    <a href='${original.replace(/\\/g, "\\\\").replace(/'/g, "\\'")}'>Raw link</a>`;
+    <a target="_blank" rel="noopener noreferrer" href='${original.replace(/\\/g, "\\\\").replace(/'/g, "\\'")}'>Raw link</a>`;
 }
 
 (async function() {
