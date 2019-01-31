@@ -50,6 +50,7 @@ function generateHTMLLink(url, title, format, original) {
         <div style="text-align: center; margin-top: 5%">
             <h1>Youtube Link in Highest Quality</h1>
             <h5>By Simon Cheng, special thanks to the awesome <a href="https://github.com/przemyslawpluta/node-youtube-dl">youtube-dl library</a></h5>
+            <h4>The official repo is now here! <a href='https://github.com/scheng123/node-youtube-dl-link'>https://github.com/scheng123/node-youtube-dl-link</a></h4>
             <h3>Insert link below!</h3>
             <input id="urlField" type="text" placeholder="Youtube Link" style="width: 40%; height: 3.5%;"/>
             <button onclick="var result = document.getElementsByTagName('iframe')[0], xhttp = new XMLHttpRequest(); result.contentDocument.body.setAttribute('style', 'text-align: center'); result.contentDocument.body.innerHTML = '<h3>Loading...</h3>'; xhttp.onerror = function(e){console.log(e); result.contentDocument.body.innerHTML = 'Could not connect to server'}; xhttp.onload = function(){result.contentDocument.body.innerHTML = xhttp.responseText}; xhttp.open('GET', '/gui?url='+window.encodeURIComponent(document.getElementById('urlField').value), true); xhttp.send();">Get link</button>
