@@ -1,0 +1,19 @@
+{
+  "name": "youtube-dl-get-link",
+  "version": "1.0.0",
+  "description": "Gets the link to the best quality of a video, transmitted to the client",
+  "main": "index.js",
+  "engine": {
+    "node": ">=8.0.0"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Simon Cheng",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "request": "^2.88.0",
+    "youtube-dl": "^1.12.2"
+  }
+}
