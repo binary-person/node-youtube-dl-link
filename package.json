@@ -1,5 +1,5 @@
 {
-  "name": "youtube-dl-get-link",
+  "name": "node-youtube-dl-link",
   "version": "1.0.0",
   "description": "Gets the link to the best quality of a video, transmitted to the client",
   "main": "index.js",
