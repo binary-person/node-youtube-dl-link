@@ -105,7 +105,7 @@ function generateHTMLLink(url, title, format, original) {
         getInfo(req.query.url, youtubedl, function(url, title, err, format) {
             if (err) {
                 result.success = false;
-                result.description = err;
+                result.description = err+'';
                 res.send(JSON.stringify(result, null, 4));
                 return;
             }
